@@ -59,7 +59,7 @@ impl Nnls {
                 // Compute components of the dual (negative gradient) vector w
                 for iz in iz1..n {
                     let j = self.index[iz];
-                    self.w[j] = self.a.slice(s![npp1.., j]).dot(&self.b.slice(s![npp1..]));
+                    self.w[j] = -2.0 * self.a.slice(s![.., j]).dot(&(&self.b - &self.a.dot(&x)));
                 }
             }
 
